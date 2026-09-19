@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!-- Auth page for login and signup to manage WasteWise user sessions -->
+<html lang="en">
+  <head>
+    <!-- Authentication page metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteWise | Login &amp; Sign Up</title>
+    <meta
+      name="description"
+      content="Login or create a WasteWise account to track your eco points and waste disposal progress."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="auth.css">
+  </head>
+  <body>
+    <!-- Full-page auth layout with branding, visual panel, and login/signup forms -->
+    <div class="auth-page-shell">
+      <div class="bg-orb orb-one"></div>
+      <div class="bg-orb orb-two"></div>
+      <div class="bg-orb orb-three"></div>
+
+      <header class="auth-header container">
+        <a href="index.html" class="brand-wrap" aria-label="Back to WasteWise home">
+          <div class="brand-mark">♻️</div>
+          <div class="brand-copy">
+            <h1>WasteWise</h1>
+          </div>
+        </a>
+      </header>
+
+      <main class="auth-main container">
+        <section class="auth-visual">
+          <div class="visual-badge">🌍 Green living starts here</div>
+          <h2>Track your impact. Save the planet.</h2>
+          <p>
+            Join WasteWise to identify waste, earn eco points, unlock levels,
+            and become part of a cleaner future.
+          </p>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <strong>5k+</strong>
+              <span>items sorted</span>
+            </div>
+            <div class="stat-card">
+              <strong>120+</strong>
+              <span>smart tips</span>
+            </div>
+            <div class="stat-card">
+              <strong>4.9/5</strong>
+              <span>user rating</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="auth-card" aria-label="Authentication panel">
+          <div class="auth-tabs" role="tablist" aria-label="Authentication tabs">
+            <button class="auth-tab active" data-mode="login" type="button">Login</button>
+            <button class="auth-tab" data-mode="signup" type="button">Sign Up</button>
+          </div>
+
+          <div class="auth-panel active" id="loginPanel">
+            <div class="panel-head">
+              <span class="tag">Welcome back</span>
+              <h3>Login to your account</h3>
+            </div>
+
+            <form id="loginForm" class="auth-form">
+              <label>
+                <span>Email</span>
+                <input type="email" id="loginEmail" placeholder="you@example.com" required autocomplete="email">
+              </label>
+
+              <label>
+                <span>Password</span>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+              </label>
+
+              <div class="form-row">
+                <label class="remember-row">
+                  <input type="checkbox">
+                  <span>Remember me</span>
+                </label>
+                <a href="#">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="primary-btn">Login</button>
+            </form>
+          </div>
+
+          <div class="auth-panel" id="signupPanel">
+            <div class="panel-head">
+              <span class="tag">Start your eco journey</span>
+              <h3>Create your account</h3>
+            </div>
+
+            <form id="signupForm" class="auth-form">
+              <label>
+                <span>Full name</span>
+                <input type="text" id="signupName" placeholder="Jane Green" required autocomplete="name">
+              </label>
+
+              <label>
+                <span>Email</span>
+                <input type="email" id="signupEmail" placeholder="you@example.com" required autocomplete="email">
+              </label>
+
+              <label>
+                <span>Password</span>
+                <input type="password" id="signupPassword" maxlength="8" placeholder="Create a strong password" required autocomplete="new-password">
+              </label>
+
+              <div class="password-hint" id="passwordHint" aria-live="polite">
+                Must be 8 characters max and include at least 1 lowercase, 1 uppercase, and 1 special character.
+              </div>
+
+              <button type="submit" class="primary-btn">Create account</button>
+            </form>
+          </div>
+
+          <div class="demo-box">
+            <strong>Demo account</strong>
+            <span>Email: demo@wastewise.app</span>
+            <span>Password: Demo@12</span>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="auth.js"></script>
+  </body>
+</html>

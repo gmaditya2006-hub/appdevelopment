@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<!-- WasteWise landing page: eco dashboard, AI waste identifier, waste guide, and impact tracking UI -->
+<html lang="en">
+  <head>
+    <!-- Page metadata and asset loading -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteWise | Sort Smart. Waste Less.</title>
+    <meta
+      name="description"
+      content="WasteWise is a modern eco-tech solution for smart waste segregation, AI identification, disposal guidance, and community impact."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- Main site navigation and branding -->
+    <header class="site-header">
+      <nav class="navbar container" aria-label="Main navigation">
+        <div class="brand-wrap">
+          <div class="brand-mark">♻️</div>
+          <div class="brand-copy">
+            <h1>WasteWise</h1>
+            <span>Sort smart. Waste less. Live better.</span>
+          </div>
+        </div>
+
+        <div class="nav-links" id="mainNavigation">
+          <a href="#home" class="active">Home</a>
+          <a href="#categories">Learn Segregation</a>
+          <a href="#scan">AI Identifier</a>
+          <a href="#centers">Find Centers</a>
+          <a href="#dashboard">Dashboard</a>
+          <a href="#rewards">Rewards</a>
+          <a href="#community">Community</a>
+          <a href="#about">About</a>
+        </div>
+
+        <div class="nav-actions">
+          <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <button type="button" class="icon-btn" aria-label="Notifications">🔔</button>
+          <a href="auth.html" class="user-pill auth-trigger" id="authTrigger">
+            <span>👤</span>
+            <span id="navUserLabel">Login</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero section for main landing content -->
+      <section class="hero" id="home">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              Smart waste disposal for a greener life
+            </div>
+            <h2>Together, We Can Create a Cleaner Tomorrow</h2>
+            <p>
+              Identify waste correctly, learn how to dispose of it responsibly,
+              and earn Eco Points while helping the planet.
+            </p>
+
+            <div class="hero-actions">
+              <button type="button" class="primary-btn action-scan">
+                <span>📷</span>
+                <span>
+                  <strong>Scan Waste</strong>
+                  <small>Identify with AI</small>
+                </span>
+              </button>
+              <button type="button" class="secondary-btn action-search">
+                <span>🔍</span>
+                <span>
+                  <strong>Search Item</strong>
+                  <small>Find disposal</small>
+                </span>
+              </button>
+            </div>
+
+            <div class="hero-stats">
+              <div>
+                <strong>⭐ 0</strong>
+                <span>Eco Points</span>
+              </div>
+              <div>
+                <strong>♻️ 0</strong>
+                <span>Items Sorted</span>
+              </div>
+              <div>
+                <strong>🏆 0</strong>
+                <span>Badges</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="glass-panel main-panel">
+              <div class="mini-header">
+                <span class="status-pill">Live Dashboard</span>
+                <span class="chip chip-green">+24% this week</span>
+              </div>
+
+              <div class="ring-card">
+                <div class="progress-ring">
+                  <div class="ring-center">
+                    <strong>82%</strong>
+                    <span>green habits</span>
+                  </div>
+                </div>
+                <div class="ring-labels">
+                  <div><span class="dot green"></span> Organic</div>
+                  <div><span class="dot blue"></span> Recyclable</div>
+                  <div><span class="dot orange"></span> E-Waste</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="floating-card card-top">
+              <span class="mini-icon">📦</span>
+              <div>
+                <strong>1,260</strong>
+                <small>items diverted</small>
+              </div>
+            </div>
+
+            <div class="floating-card card-bottom">
+              <span class="mini-icon">🌱</span>
+              <div>
+                <strong>36</strong>
+                <small>recycled this month</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Waste image upload and AI identification panel -->
+      <section class="scanner-section container" id="scan">
+        <div class="section-heading center">
+          <span class="section-tag">AI Identifier</span>
+          <h3>What kind of waste is this?</h3>
+        </div>
+
+        <div class="scanner-grid">
+          <div class="upload-box" id="uploadBox" tabindex="0" aria-label="Upload a waste image">
+            <input type="file" id="fileInput" accept="image/*" hidden>
+            <div class="upload-inner">
+              <div class="upload-icon">📷</div>
+              <p>Drop your waste image here</p>
+              <span>or use your camera</span>
+              <button type="button" class="scan-btn" id="scanButton">📷 Scan Waste</button>
+              <div class="upload-actions">
+                <button type="button" class="secondary-small hidden" id="cancelUploadBtn">Cancel image</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="analysis-card hidden" id="resultCard">
+            <div class="analysis-top">
+              <div>
+                <span class="analysis-label">AI Analysis</span>
+                <h4 id="analysisTitle">Analyzing your waste...</h4>
+              </div>
+              <span class="pulse-dot"></span>
+            </div>
+
+            <div class="loading-block">
+              <div class="loading-copy">🔄 AI is identifying</div>
+              <div class="progress-bar">
+                <span id="progressBar"></span>
+              </div>
+              <div class="percent-label" id="progressLabel">82%</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="safety-note" aria-label="Image safety and authenticity screening">
+          <div class="safety-note-icon">🛡️</div>
+          <div>
+            <strong>Image Safety &amp; Authenticity Check</strong>
+            <p>Every upload is screened for safety, waste relevance, duplicates, and authenticity signals before analysis.</p>
+          </div>
+          <span class="safety-note-status">Pre-screen enabled</span>
+        </aside>
+      </section>
+
+      <section class="community-intelligence container" id="cleanliness">
+        <div class="section-heading">
+          <span class="section-tag">Community Intelligence</span>
+          <h3>Measure, verify, improve</h3>
+          <p>Turn area photos into actionable cleanliness data for your campus or neighborhood.</p>
+        </div>
+
+        <div class="intelligence-grid two-tools">
+          <article class="intelligence-card score-tool">
+            <div class="tool-heading"><span class="tool-icon">🧭</span><div><span class="analysis-label">AI cleanliness score</span><h4>How clean is this area?</h4></div><span class="tool-points">+5 XP</span></div>
+            <label class="area-upload" id="cleanlinessUploadZone"><span id="cleanlinessFileLabel">📷 Upload a street, park, or campus photo</span><input type="file" id="cleanlinessInput" accept="image/*" hidden></label>
+            <div class="feature-preview hidden" id="cleanlinessPreview"></div>
+            <div class="feature-actions"><button type="button" class="primary-btn small-btn" id="scoreAreaBtn">Calculate score</button><button type="button" class="secondary-small hidden" id="cancelCleanlinessBtn">Cancel image</button></div>
+            <div class="cleanliness-result hidden" id="cleanlinessResult" aria-live="polite"></div>
+          </article>
+
+          <article class="intelligence-card compare-tool">
+            <div class="tool-heading"><span class="tool-icon">↔️</span><div><span class="analysis-label">Before &amp; after</span><h4>Verify a cleanup</h4></div><span class="tool-points">+5 XP</span></div>
+            <div class="compare-inputs">
+              <label class="compare-dropzone" id="beforeDropzone">
+                <span class="compare-dropzone-label">Before</span>
+                <span class="compare-dropzone-prompt">↥ Drop or browse a photo</span>
+                <small>JPG, PNG, or WebP</small>
+                <input type="file" id="beforeCleaningInput" accept="image/jpeg,image/png,image/webp" hidden>
+              </label>
+              <label class="compare-dropzone" id="afterDropzone">
+                <span class="compare-dropzone-label">After</span>
+                <span class="compare-dropzone-prompt">↥ Drop or browse a photo</span>
+                <small>JPG, PNG, or WebP</small>
+                <input type="file" id="afterCleaningInput" accept="image/jpeg,image/png,image/webp" hidden>
+              </label>
+            </div>
+            <div class="compare-previews" id="comparePreviews"><span>Before preview</span><span>After preview</span></div>
+            <div class="feature-actions comparison-actions"><button type="button" class="primary-btn small-btn" id="compareCleaningBtn">Submit for Verification</button><button type="button" class="secondary-small hidden" id="cancelComparisonBtn">Cancel images</button></div>
+            <div class="cleanliness-result hidden" id="comparisonResult" aria-live="polite"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Waste category cards and disposal learning section -->
+      <section class="categories-section container" id="categories">
+        <div class="section-heading">
+          <span class="section-tag">Waste Guide</span>
+          <h3>Know Your Waste</h3>
+          <p>Learn where everyday items belong.</p>
+        </div>
+
+        <div class="cards-grid">
+          <article class="category-card organic">
+            <div class="card-icon">🍃</div>
+            <h4>Organic Waste</h4>
+            <p>Food and biodegradable materials</p>
+            <ul>
+              <li>Fruit &amp; vegetable peels</li>
+              <li>Food leftovers</li>
+              <li>Garden waste</li>
+              <li>Tea &amp; coffee grounds</li>
+            </ul>
+            <button type="button">Learn More →</button>
+          </article>
+
+          <article class="category-card recyclable">
+            <div class="card-icon">♻️</div>
+            <h4>Recyclable Waste</h4>
+            <p>Materials that can be processed again</p>
+            <ul>
+              <li>Paper &amp; cardboard</li>
+              <li>Plastic bottles</li>
+              <li>Glass</li>
+              <li>Metal cans</li>
+            </ul>
+            <button type="button">Learn More →</button>
+          </article>
+
+          <article class="category-card e-waste">
+            <div class="card-icon">💻</div>
+            <h4>E-Waste</h4>
+            <p>Electronic products requiring special handling</p>
+            <ul>
+              <li>Phones</li>
+              <li>Chargers</li>
+              <li>Laptops</li>
+              <li>Keyboards</li>
+            </ul>
+            <button type="button">Learn More →</button>
+          </article>
+
+          <article class="category-card hazardous">
+            <div class="card-icon">⚠️</div>
+            <h4>Hazardous Waste</h4>
+            <p>Materials requiring careful handling</p>
+            <ul>
+              <li>Batteries</li>
+              <li>Chemicals</li>
+              <li>Paint</li>
+              <li>Certain bulbs</li>
+            </ul>
+            <button type="button">Learn More →</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="search-section container" id="search">
+        <div class="section-heading center">
+          <span class="section-tag">Smart Search</span>
+          <h3>Not sure where it belongs?</h3>
+        </div>
+
+        <div class="search-panel">
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="text" id="searchInput" value="battery" placeholder="Search &quot;battery&quot;, &quot;bottle&quot;...">
+          </div>
+
+          <div class="popular-searches">
+            <span>Popular searches:</span>
+            <button type="button" class="search-chip" data-query="Battery">🔋 Battery</button>
+            <button type="button" class="search-chip" data-query="Plastic Bottle">🧴 Plastic Bottle</button>
+            <button type="button" class="search-chip" data-query="Mobile Phone">📱 Mobile Phone</button>
+            <button type="button" class="search-chip" data-query="Banana Peel">🍌 Banana Peel</button>
+            <button type="button" class="search-chip" data-query="Cardboard">📦 Cardboard</button>
+          </div>
+        </div>
+
+        <div class="search-result" id="searchResult">
+          <div class="result-label-row">
+            <span class="result-item-icon">🔋</span>
+            <span class="result-item-name">Battery</span>
+          </div>
+
+          <div class="result-body">
+            <div>
+              <p class="result-caption">Category</p>
+              <h4>🔴 Hazardous Waste</h4>
+            </div>
+            <p class="warning-text">⚠️ Keep separate from regular waste.</p>
+          </div>
+
+          <div class="result-actions">
+            <button type="button" class="secondary-small">View Disposal Guide</button>
+            <button type="button" class="primary-small">Find Collection Center</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- User dashboard with eco points, proof upload, and impact summary -->
+      <section class="dashboard-section container" id="dashboard">
+        <div class="section-heading">
+          <span class="section-tag">Personal Dashboard</span>
+          <h3>Good morning, <span id="welcomeUserName">Green Champion</span>! 🌱</h3>
+        </div>
+
+        <div class="stat-grid">
+          <div class="mini-stat">
+            <span class="stat-icon">⭐</span>
+            <div>
+              <strong id="dashboardTotalPoints">0</strong>
+              <small>Eco Points</small>
+            </div>
+          </div>
+
+          <div class="mini-stat">
+            <span class="stat-icon">♻️</span>
+            <div>
+              <strong id="dashboardItemsCount">0</strong>
+              <small>Items</small>
+            </div>
+          </div>
+
+          <div class="mini-stat">
+            <span class="stat-icon">🏆</span>
+            <div>
+              <strong id="dashboardBadgesCount">0</strong>
+              <small>Badges</small>
+            </div>
+          </div>
+
+          <div class="mini-stat">
+            <span class="stat-icon">🔥</span>
+            <div>
+              <strong id="dashboardStreak">0</strong>
+              <small>Day Streak</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="proof-upload-panel light-panel video-proof-panel">
+          <div class="panel-topline proof-panel-heading">
+            <div>
+              <span class="section-tag">Proof of action</span>
+              <strong>AI checks your waste handling</strong>
+              <p>Upload a short video showing your responsible waste disposal process.</p>
+            </div>
+            <span class="video-reward-pill">+20 XP</span>
+          </div>
+
+          <div class="proof-upload-body">
+            <div class="proof-upload-box video-upload-box" id="dashboardUploadPreview" tabindex="0" aria-label="Upload a disposal video">
+              <input type="file" id="dashboardUploadInput" accept="video/mp4,video/webm,video/quicktime,video/*" hidden>
+              <div class="proof-empty-state video-empty-state">
+                <span class="video-upload-icon">▶</span>
+                <strong>Drop your disposal video here</strong>
+                <span>MP4, WebM or MOV · up to 60 seconds</span>
+                <button type="button" class="video-browse-btn">Choose video</button>
+              </div>
+            </div>
+
+            <div class="proof-controls video-proof-actions">
+              <div class="proof-actions">
+                <button type="button" class="primary-btn small-btn" id="dashboardUploadBtn">Verify &amp; Earn Points</button>
+                <button type="button" class="secondary-btn small-btn" id="dashboardCancelUploadBtn">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="proof-screening-strip">
+            <span class="screening-check">✦</span>
+            <div>
+              <strong>Authenticity screening</strong>
+              <span>Checks video signals before awarding points.</span>
+            </div>
+            <span class="screening-status" id="videoScreeningStatus">Ready</span>
+          </div>
+          <p class="proof-status" id="dashboardUploadStatus">Your video stays in this browser while it is screened. No points are awarded until it passes.</p>
+        </div>
+
+        <div class="analytics-grid">
+          <div class="chart-panel light-panel">
+            <div class="panel-topline">
+              <span>Weekly activity</span>
+              <strong>Your Waste Activity</strong>
+            </div>
+            <div class="chart-area" role="img" aria-label="Weekly activity chart">
+              <div class="bars">
+                <span style="--h: 38%"></span>
+                <span style="--h: 56%"></span>
+                <span style="--h: 62%"></span>
+                <span style="--h: 74%"></span>
+                <span style="--h: 66%"></span>
+                <span style="--h: 84%"></span>
+                <span style="--h: 90%"></span>
+              </div>
+              <div class="chart-labels">
+                <span>M</span>
+                <span>T</span>
+                <span>W</span>
+                <span>T</span>
+                <span>F</span>
+                <span>S</span>
+                <span>S</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="breakdown-panel light-panel">
+            <div class="panel-topline">
+              <span>This Week</span>
+            </div>
+            <ul class="category-breakdown">
+              <li><span class="dot green"></span>Organic <strong>12</strong></li>
+              <li><span class="dot blue"></span>Recyclable <strong>24</strong></li>
+              <li><span class="dot orange"></span>E-Waste <strong>8</strong></li>
+              <li><span class="dot red"></span>Hazardous <strong>4</strong></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gamified rewards and challenge section -->
+      <section class="rewards-section container" id="rewards">
+        <div class="section-heading">
+          <span class="section-tag">Gamification</span>
+          <h3>Your Eco Level</h3>
+        </div>
+
+        <div class="reward-grid">
+          <div class="level-card glass-panel">
+            <div class="level-badge" id="levelBadge">🌱 ECO BEGINNER</div>
+            <h4 id="levelTitle">Level 1</h4>
+            <div class="xp-track">
+              <span id="xpProgressBar"></span>
+            </div>
+            <p id="xpProgressText">0 / 200 XP</p>
+          </div>
+
+          <div class="badges-card light-panel">
+            <h4>🏅 Your Achievements</h4>
+            <ul class="badge-list" id="badgeList">
+              <li><span>🌱 Eco Starter</span> <em>🔒</em></li>
+              <li><span>♻️ Recycler</span> <em>🔒</em></li>
+              <li><span>🏆 Green Champion</span> <em>🔒</em></li>
+              <li><span>🛡️ Waste Warrior</span> <em>🔒</em></li>
+              <li><span>🌍 Planet Guardian</span> <em>🔒</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="reward-layout">
+          <div class="challenge-panel light-panel">
+            <h4>🎯 Daily Challenges</h4>
+            <div id="challengeList"></div>
+          </div>
+
+          <div class="login-panel light-panel">
+            <h4>🎁 Rewards Shop</h4>
+            <div id="rewardList" class="reward-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nearby disposal center map and location search -->
+      <section class="centers-section container" id="centers">
+        <div class="section-heading center">
+          <span class="section-tag">Find a Disposal Center</span>
+          <h3>📍 Find a Disposal Center</h3>
+        </div>
+
+        <div class="center-search">
+          <label>What do you want to dispose?</label>
+          <div class="center-controls">
+            <select id="wasteTypeSelect" aria-label="Waste category">
+              <option>Recyclable</option>
+              <option>Organic</option>
+              <option>E-Waste</option>
+              <option>Hazardous</option>
+            </select>
+            <button type="button" class="location-btn" id="useLocationBtn">📍 Use my location</button>
+            <button type="button" class="primary-btn small-btn" id="findCentersBtn">Find Centers</button>
+          </div>
+        </div>
+
+        <div class="map-layout">
+          <div class="map-panel">
+            <iframe
+              id="mapFrame"
+              title="Google map of nearby recycling centers"
+              src="https://www.google.com/maps?q=recycling+center+near+me&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+
+          <div class="center-results">
+            <article class="center-card">
+              <div class="center-card-head">
+                <h4>♻️ Green Recycling Center</h4>
+              </div>
+              <p>📍 1.8 km away</p>
+              <p>🔵 Accepts: Paper, Plastic, Glass</p>
+              <div class="rating-row">
+                <span>⭐ 4.6</span>
+              </div>
+              <div class="card-actions">
+                <a href="https://www.google.com/maps/search/recycling+center+near+me" target="_blank" rel="noreferrer">Directions</a>
+                <a href="https://www.google.com/maps/search/recycling+center+near+me" target="_blank" rel="noreferrer">Details</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="impact-section container" id="about">
+        <div class="section-heading center">
+          <span class="section-tag">Impact</span>
+          <h3>Your Impact Matters</h3>
+        </div>
+
+        <div class="impact-grid">
+          <div class="impact-panel glass-panel large-panel">
+            <p>Because of your activity:</p>
+            <div class="impact-stat">♻️ 0 recyclable items recorded</div>
+            <div class="impact-stat">🌳 Estimated positive impact</div>
+            <div class="impact-stat">📦 0 items diverted toward recycling</div>
+            <p class="impact-note">🌱 You're just getting started — every small action counts.</p>
+          </div>
+          <div class="impact-panel light-panel small-panel">
+            <div class="mini-eco-meter">
+              <span>Recycling rate</span>
+              <strong>0%</strong>
+            </div>
+            <div class="meter-bar zero-meter"><span></span></div>
+            <p>Waste diverted from landfill through better sorting and local collection planning.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="consequences-section container">
+        <div class="section-heading center">
+          <span class="section-tag">Awareness</span>
+          <h3>Why Proper Segregation Matters</h3>
+        </div>
+
+        <div class="consequence-grid">
+          <article class="consequence-card">
+            <div class="icon-wrap">🌍</div>
+            <h4>Environmental Pollution</h4>
+            <p>Mixed waste contaminates soil and air, harming ecosystems and biodiversity.</p>
+          </article>
+          <article class="consequence-card">
+            <div class="icon-wrap">🔥</div>
+            <h4>Global Warming</h4>
+            <p>Organic waste in landfills releases methane, accelerating climate change.</p>
+          </article>
+          <article class="consequence-card">
+            <div class="icon-wrap">🏥</div>
+            <h4>Health Issues</h4>
+            <p>Improper handling of hazardous materials can cause serious illnesses and injuries.</p>
+          </article>
+          <article class="consequence-card">
+            <div class="icon-wrap">🌊</div>
+            <h4>Marine Life</h4>
+            <p>Plastic and chemical waste can end up in rivers and oceans, endangering species.</p>
+          </article>
+          <article class="consequence-card">
+            <div class="icon-wrap">💰</div>
+            <h4>Economic Impact</h4>
+            <p>Unsorted waste increases cleanup costs and reduces recycling recovery value.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="community-section container" id="community">
+        <div class="section-heading">
+          <span class="section-tag">Community</span>
+          <h3>WasteWise Community</h3>
+        </div>
+
+        <div class="community-grid">
+          <div class="leaderboard light-panel">
+            <div class="leaderboard-heading">
+              <div>
+                <span class="leaderboard-kicker">Community spotlight</span>
+                <h4>🏆 Weekly Leaderboard</h4>
+                <p id="leaderboardWeekLabel">Fresh rankings every Monday</p>
+              </div>
+              <span class="leaderboard-live"><span></span> Live</span>
+            </div>
+            <div class="leaderboard-summary" role="group" aria-label="Weekly leaderboard summary">
+              <div><strong id="leaderboardParticipantCount">0</strong><span>participants</span></div>
+              <div><strong id="leaderboardTotalPoints">0</strong><span>XP earned</span></div>
+              <div><strong>Top 5</strong><span>featured</span></div>
+            </div>
+            <section class="leaderboard-podium" id="leaderboardPodium" aria-label="Top three weekly contributors"></section>
+            <ol id="leaderboardList">
+              <li><span>Loading...</span> <strong>0 XP</strong></li>
+            </ol>
+            <div class="leaderboard-footer"><span>Every verified action counts.</span><span>Resets Monday</span></div>
+          </div>
+
+          <div class="challenge-panel glass-panel">
+            <h4>🌱 Community Challenge</h4>
+            <p>“Recycle 1000 items this week”</p>
+            <div class="xp-track wide"><span id="communityProgressBar"></span></div>
+            <strong id="communityProgressText">0 / 1000</strong>
+            <button type="button" class="primary-btn small-btn">Join Challenge</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="bottom-strip container">
+        <aside class="challenge-mini light-panel" aria-label="Today's Green Challenge">
+          <h4>🌱 Today's Green Challenge</h4>
+          <p>Properly segregate 5 items today.</p>
+          <div class="mini-progress zero-progress-mini">
+            <span></span>
+          </div>
+          <small>Progress: 0/5</small>
+          <strong>⭐ Reward: +50 XP</strong>
+        </aside>
+
+        <aside class="notice-panel light-panel" aria-label="Notifications">
+          <h4>🔔 Notifications</h4>
+          <ul>
+            <li>⭐ You have 0 Eco Points yet.</li>
+            <li>🏆 Start sorting to unlock your first badge.</li>
+            <li>♻️ Begin by recording your first recyclable item.</li>
+          </ul>
+        </aside>
+
+        <aside class="profile-panel light-panel" aria-label="User profile" id="profilePanel">
+          <div class="avatar">👤</div>
+          <h4 id="profileName">NewUser</h4>
+          <span class="profile-rank" id="profileRank">🌱 Eco Beginner</span>
+          <span class="profile-level" id="profileLevel">Level 1</span>
+          <div class="profile-points" id="profilePoints">⭐ 0 Eco Points</div>
+          <div class="profile-meta">
+            <span id="profileScans">Scans 0</span>
+            <span id="profileRecycled">Recycled 0</span>
+            <span id="profileBadges">Badges 0</span>
+          </div>
+          <div class="profile-actions">
+            <button type="button" class="secondary-small" id="viewAchievementsBtn">View Achievements</button>
+            <button type="button" class="secondary-small" id="logoutBtn">Log out</button>
+          </div>
+        </aside>
+      </div>
+
+      <section class="contact-section container" id="contact">
+        <div class="section-heading center">
+          <span class="section-tag">Contact Us</span>
+          <h3>Let’s build a cleaner future together</h3>
+          <p>Have a question, partnership idea, or feedback? We’d love to hear from you.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card contact-info">
+            <h4>Reach out</h4>
+            <div class="contact-item">
+              <span>📍</span>
+              <div>
+                <strong>Office</strong>
+                <p>Eco Valley Campus, Green Avenue, Colombo</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span>📞</span>
+              <div>
+                <strong>Call</strong>
+                <p>+94 11 234 5678</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span>✉️</span>
+              <div>
+                <strong>Email</strong>
+                <p>hello@wastewise.app</p>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact-card contact-form">
+            <div class="input-row">
+              <label>
+                <span>Name</span>
+                <input type="text" placeholder="Your name" aria-label="Your name">
+              </label>
+            </div>
+            <div class="input-row">
+              <label>
+                <span>Email</span>
+                <input type="email" placeholder="you@example.com" aria-label="Your email">
+              </label>
+            </div>
+            <div class="input-row">
+              <label>
+                <span>Message</span>
+                <textarea rows="5" placeholder="Tell us how we can help..." aria-label="Your message"></textarea>
+              </label>
+            </div>
+            <button type="submit" class="primary-btn">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="brand-mark small">♻️</div>
+          <h3>WasteWise</h3>
+          <p>Sort smart. Waste less. Live better.</p>
+        </div>
+
+        <div>
+          <h5>Product</h5>
+          <ul>
+            <li>AI Identifier</li>
+            <li>Learn Segregation</li>
+            <li>Find Centers</li>
+            <li>Dashboard</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Resources</h5>
+          <ul>
+            <li>Waste Guide</li>
+            <li>Recycling Tips</li>
+            <li>FAQ</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Community</h5>
+          <ul>
+            <li>Challenges</li>
+            <li>Leaderboard</li>
+          </ul>
+        </div>
+
+        <div>
+          <h5>Contact</h5>
+          <ul>
+            <li>Email</li>
+            <li>Social</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom container">
+        <span>© 2026 WasteWise</span>
+        <span>Built for a cleaner tomorrow 🌍</span>
+      </div>
+    </footer>
+
+    <!-- Disposal guide popup for item-specific instructions -->
+    <div class="modal-overlay hidden" id="disposalGuideModal">
+      <div class="modal-content disposal-modal">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span id="guideIcon" class="modal-icon">♻️</span>
+            <div>
+              <h2 id="guideName">Waste Item</h2>
+              <span id="guideCategory">Category</span>
+            </div>
+          </div>
+          <button type="button" class="modal-close" id="closeDisposalGuide">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <section class="guide-section">
+            <h3>⚠️ Important</h3>
+            <p id="guideWarning">Loading...</p>
+          </section>
+
+          <section class="guide-section">
+            <h3>📋 Disposal Steps</h3>
+            <ol id="guideSteps">
+              <li>Loading disposal information...</li>
+            </ol>
+          </section>
+
+          <section class="guide-section">
+            <h3>💡 Pro Tips</h3>
+            <ul id="guideTips">
+              <li>Loading tips...</li>
+            </ul>
+          </section>
+
+          <section class="guide-section">
+            <h3>🌍 Environmental Impact</h3>
+            <p id="guideImpact">Loading impact information...</p>
+          </section>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="primary-btn" id="findCenterFromGuide">📍 Find Disposal Center</button>
+          <button type="button" class="secondary-btn" id="closeGuideBtn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="verification-modal-overlay hidden" id="verificationResultModal" aria-live="polite">
+      <div class="verification-modal success" id="verificationModalCard">
+        <div class="verification-icon" id="verificationModalIcon">🌱</div>
+        <div class="verification-badge" id="verificationModalBadge">Proof Verified</div>
+        <h3 id="verificationModalTitle">Plantation Proof Verified</h3>
+        <p id="verificationModalMessage">Your eco action has been validated and points have been awarded.</p>
+        <div class="verification-points" id="verificationModalPoints">+40 Eco Points</div>
+        <button type="button" class="verification-close-btn" id="closeVerificationModal">Continue</button>
+      </div>
+    </div>
+
+    <div class="feature-alert-overlay hidden" id="featureAlertModal" role="alertdialog" aria-modal="true" aria-labelledby="featureAlertTitle">
+      <div class="feature-alert-card" id="featureAlertCard">
+        <div class="feature-alert-icon" id="featureAlertIcon">✅</div>
+        <span class="feature-alert-badge" id="featureAlertBadge">Verified</span>
+        <h3 id="featureAlertTitle">Feature complete</h3>
+        <p id="featureAlertMessage">Your result is ready.</p>
+        <div class="feature-alert-points" id="featureAlertPoints"></div>
+        <button type="button" class="primary-btn" id="closeFeatureAlertBtn">Continue</button>
+      </div>
+    </div>
+    <div class="comparison-lightbox hidden" id="comparisonLightbox" role="dialog" aria-modal="true" aria-label="Expanded cleanup comparison">
+      <button type="button" class="lightbox-close" id="closeComparisonLightbox" aria-label="Close expanded comparison">×</button>
+      <div class="lightbox-images">
+        <figure><figcaption>Before</figcaption><img id="lightboxBeforeImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Expanded before-cleaning photo"></figure>
+        <figure><figcaption>After</figcaption><img id="lightboxAfterImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Expanded after-cleaning photo"></figure>
+      </div>
+    </div>
+
+    <!-- AI assistant chat widget for quick eco guidance -->
+    <div class="chatbot-container" id="chatbotContainer">
+      <div class="chatbot-modal" id="chatbotModal">
+        <div class="chatbot-header">
+          <div class="chatbot-title">
+            <span class="chatbot-icon">🤖</span>
+            <div>
+              <h3>WasteWise Assistant</h3>
+              <span class="status-indicator">Online</span>
+            </div>
+          </div>
+          <button type="button" class="close-btn" id="closeChatbot" aria-label="Close chatbot">✕</button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbotMessages">
+          <div class="message bot-message">
+            <div class="message-avatar">🤖</div>
+            <div class="message-content">
+              <p>Hi! 👋 I'm your WasteWise Assistant. How can I help you today?</p>
+              <div class="quick-actions">
+                <button type="button" class="quick-action" data-action="waste-info">What is this?</button>
+                <button type="button" class="quick-action" data-action="how-to">How to dispose?</button>
+                <button type="button" class="quick-action" data-action="find-center">Find center</button>
+                <button type="button" class="quick-action" data-action="tips">💡 Tips</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chatbot-input-area">
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="chatbotInput" 
+              class="chatbot-input" 
+              placeholder="Ask about waste disposal..." 
+              aria-label="Message input"
+            >
+            <button type="button" id="sendBtn" class="send-btn" aria-label="Send message">➤</button>
+          </div>
+          <small class="input-hint">Ask about any waste item or get disposal tips</small>
+        </div>
+      </div>
+
+      <button type="button" class="chatbot-toggle" id="chatbotToggle" aria-label="Open assistant">
+        <span class="toggle-icon">💬</span>
+        <span class="toggle-label">Assistant</span>
+      </button>
+    </div>
+
+    <script src="proofVerification.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
